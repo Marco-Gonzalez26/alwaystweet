@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 9999px;
+  width: 49px;
+  height: 49px;
+}
+
+.avatar + strong {
+  margin-left: 8px;
+}

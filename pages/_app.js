@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import AppLayout from "components/AppLayout"
+import React from "react"
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function App({ Component, pageProps }) {
+  return (
+    <AppLayout>
+      <Component {...pageProps} />
+    </AppLayout>
+  )
 }
 
-export default MyApp
+export default App
