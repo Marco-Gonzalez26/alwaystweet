@@ -109,7 +109,7 @@ export default function ComposeAlweet() {
       <Head>
         <title>Make an Alweet / AlwaysTweet</title>
       </Head>
-      <div className=".header">
+      <div className="header">
         <ArrowLeft onClick={() => router.push("/home")} />
       </div>
       <section className="form-container">
@@ -213,11 +213,11 @@ export default function ComposeAlweet() {
 
           .header {
             display: flex;
-            align-items: flex-start;
             justify-content: flex-start;
-            width: 100%;
-            height: 50px;
-            flex-direction: column;
+            height: 55px;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            margin: 5px;
           }
         `}
       </style>
