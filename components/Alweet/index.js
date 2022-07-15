@@ -13,6 +13,7 @@ export default function Alweet({
   createdAt
 }) {
   const timeago = useTimeAgo(createdAt)
+
   const router = useRouter()
   const title = useDateTimeFormat(createdAt)
 

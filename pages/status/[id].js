@@ -2,6 +2,7 @@ import Alweet from "components/Alweet"
 import { firestore } from "../../firebase/admin"
 import { useRouter } from "next/router"
 import ArrowLeft from "components/Icons/ArrowLeft"
+
 export default function AlweetPage(props) {
   const router = useRouter()
 
@@ -11,7 +12,7 @@ export default function AlweetPage(props) {
     <>
       <div className=".header">
         <ArrowLeft onClick={() => router.push("/home")} />
-        <h2>{props.userName && `Alweet of ${props.userName}`}</h2>
+        <h3>{props.userName && `Alweet of ${props.userName}`}</h3>
       </div>
       <Alweet {...props}></Alweet>
       <style jsx>{`
@@ -24,7 +25,7 @@ export default function AlweetPage(props) {
           flex-direction: column;
         }
 
-        h2 {
+        h3 {
           margin: 0;
           padding: 0;
           font-size: 25px;
@@ -39,7 +40,7 @@ export default function AlweetPage(props) {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { id: "EGaqUCnuNUabFLDCUPFG" } }],
+    paths: [{ params: { id: "DCbl47ACmEEeADmxzerL" } }],
     fallback: true
   }
 }
