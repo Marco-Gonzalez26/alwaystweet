@@ -1,6 +1,9 @@
 const admin = require("firebase-admin")
 
-const serviceAccount = JSON.parse(process.env.FIREBASE_KEYS)
+const serviceAccount =
+  process.env.NODE_ENV === "development"
+    ? require("./firebase-keys-dev.json")
+    : JSON.parse(process.env.FIREBASE_KEYS)
 
 !admin.apps.length &&
   admin.initializeApp({
