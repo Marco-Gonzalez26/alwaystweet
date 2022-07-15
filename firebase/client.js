@@ -1,5 +1,10 @@
 import { initializeApp, getApps } from "@firebase/app"
-import { getAuth, signInWithPopup, GithubAuthProvider } from "firebase/auth"
+import {
+  getAuth,
+  signInWithPopup,
+  GithubAuthProvider,
+  GoogleAuthProvider
+} from "firebase/auth"
 import {
   getFirestore,
   collection,
@@ -41,11 +46,15 @@ export const onAuthStateChanged = (onChange) => {
 
 export const loginWithGitHub = () => {
   const provider = new GithubAuthProvider()
-  return signInWithPopup(auth, provider).then((result) => {
-    return mapUserFromFirebaseAuthToUser(result)
-  })
+  return signInWithPopup(auth, provider).then(mapUserFromFirebaseAuthToUser)
 }
 
+export const loginWithGoogle = () => {
+  const provider = new GoogleAuthProvider()
+  return signInWithPopup(auth, provider)
+    .then(mapUserFromFirebaseAuthToUser)
+    .catch((e) => console.log(e))
+}
 export const addAlweet = async ({ content, avatar, userId, img, userName }) => {
   return await addDoc(collection(database, "alweets"), {
     avatar,

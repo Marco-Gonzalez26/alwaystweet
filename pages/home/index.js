@@ -29,7 +29,7 @@ export default function HomePage() {
         <title>Home / AlwaysTweet</title>
       </Head>
       <header>
-        <h2>Inicio</h2>
+        <h2>Home</h2>
       </header>
       <section>
         {timeline.map((alweet) => {

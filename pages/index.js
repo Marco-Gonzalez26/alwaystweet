@@ -2,10 +2,11 @@ import { useEffect } from "react"
 import Head from "next/head"
 import Button from "components/Icons/Button"
 import GitHub from "components/Icons/Github"
-import { loginWithGitHub } from "../firebase/client"
+import { loginWithGitHub, loginWithGoogle } from "../firebase/client"
 import { colors } from "styles/theme"
 import { useRouter } from "next/router"
 import useUser, { USER_STATES } from "hooks/useUser"
+import Google from "components/Icons/Google"
 
 export default function Home() {
   const user = useUser()
@@ -15,8 +16,14 @@ export default function Home() {
     user && router.replace("/home")
   }, [user])
 
-  const handleClick = () => {
+  const handleGithubClick = () => {
     loginWithGitHub().catch((err) => {
+      console.log(err)
+    })
+  }
+
+  const handleGoogleClick = () => {
+    loginWithGoogle().catch((err) => {
       console.log(err)
     })
   }
@@ -39,10 +46,16 @@ export default function Home() {
 
         <div>
           {user === USER_STATES.NOT_LOGGED && (
-            <Button onClick={handleClick}>
-              <GitHub fill="#fff" width={24} height={24} />
-              Login with GitHub
-            </Button>
+            <>
+              <Button onClick={handleGithubClick}>
+                <GitHub fill="#fff" width={24} height={24} />
+                Login with GitHub
+              </Button>
+              <Button onClick={handleGoogleClick}>
+                <Google fill="#fff" width={24} height={24} />
+                Login with Google
+              </Button>
+            </>
           )}
           {user === USER_STATES.NOT_KNOWN && <span>Loading...</span>}
         </div>

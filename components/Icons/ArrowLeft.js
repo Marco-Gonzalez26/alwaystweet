@@ -2,9 +2,9 @@ import * as React from "react"
 
 export default function ArrowLeft(props) {
   return (
-    <svg width={21} height={21} viewBox="0 0 21 21" {...props}>
+    <svg {...props} width={65} height={65} viewBox="0 0 21 21">
       <g
-        fill="none"
+        fill="#09f"
         fillRule="evenodd"
         strokeLinecap="round"
         strokeLinejoin="round"

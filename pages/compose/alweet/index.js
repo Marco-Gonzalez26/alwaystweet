@@ -1,11 +1,14 @@
 import Button from "components/Icons/Button"
 import useUser from "../../../hooks/useUser"
 import Avatar from "components/Avatar"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/router"
 import { addAlweet, uploadImage } from "../../../firebase/client"
 import Head from "next/head"
 import { getDownloadURL } from "firebase/storage"
+import Picture from "components/Icons/Picture"
+import { colors } from "styles/theme"
+import ArrowLeft from "components/Icons/ArrowLeft"
 
 const COMPOSE_STATES = {
   USER_NOT_KNOWN: 0,
@@ -30,7 +33,9 @@ export default function ComposeAlweet() {
   const [imgURL, setImgURL] = useState(null)
   const router = useRouter()
   const user = useUser()
+  const inputRef = useRef()
 
+  console.log(user)
   useEffect(() => {
     if (task) {
       const onProgress = () => {}
@@ -86,11 +91,27 @@ export default function ComposeAlweet() {
     setTask(task)
   }
 
+  // // const handleFiles = (e) => {
+  // //   e.preventDefault()
+  // //   const data = inputRef.current.value
+  // //   if (data) {
+  // //     data.substring(12)
+  // //     setImgURL(data)
+  // //   }
+
+  //   const task = uploadImage(inputRef.current.value)
+  //   setTask(task)
+
+  //   // const task = uploadImage()
+  // }
   return (
     <>
       <Head>
         <title>Make an Alweet / AlwaysTweet</title>
       </Head>
+      <div className=".header">
+        <ArrowLeft onClick={() => router.push("/home")} />
+      </div>
       <section className="form-container">
         {user && (
           <section className="avatar-container">
@@ -112,8 +133,14 @@ export default function ComposeAlweet() {
               <img src={imgURL} />
             </section>
           )}
-          <div>
+          <div className="button-container">
             <Button disabled={isButtonDisabled}>Alweet</Button>
+            <div className="image-upload">
+              <label htmlFor="file-input">
+                <Picture />
+              </label>
+              <input id="file-input" name="files[]" ref={inputRef} />
+            </div>
           </div>
         </form>
       </section>
@@ -138,40 +165,59 @@ export default function ComposeAlweet() {
             padding: 10px;
           }
 
-          .avatar-container{
+          .avatar-container {
             padding-top: 15px;
-            padding-left: 15px
+            padding-left: 15px;
           }
 
-          .form-container{
+          .form-container {
             display: flex;
             align-items: flex-start;
-
           }
           .remove-img {
             position: relative;
           }
           textarea {
-            min-width:100%;
-            border: ${
-              drag === DRAG_IMAGES_STATES.DRAG_OVER
-                ? "3px dashed #09f"
-                : "3px solid transparent"
-            };
+            min-width: 100%;
+            border: ${drag === DRAG_IMAGES_STATES.DRAG_OVER
+              ? "3px dashed #09f"
+              : "3px solid transparent"};
             border-radius: 10px;
             padding: 10px;
             resize: none;
             font-size: 21px;
             outline: 0;
-
           }
-
-          textarea:focus {
-
+          .button-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+          }
+          :global(svg):hover {
+            background: radial-gradient(#0099ff33 0%, transparent 15%);
+            background-size: 180px 180px;
+            background-position: right;
+            cursor: pointer;
+            color: ${colors.primary};
+          }
           img {
             border-radius: 10px;
             width: 100%;
             height: auto;
+          }
+          .image-upload > input {
+            display: none;
+            pointer-events: none;
+          }
+
+          .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            width: 100%;
+            height: 50px;
+            flex-direction: column;
           }
         `}
       </style>

@@ -21,6 +21,7 @@ export default function Button({ children, onClick, disabled }) {
             font-weight: 700;
             padding: 8px 24px;
             transition: opacity 0.3s ease;
+            margin: 8px;
           }
 
           button > :global(svg) {

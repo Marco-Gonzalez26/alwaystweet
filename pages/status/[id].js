@@ -1,7 +1,7 @@
 import Alweet from "components/Alweet"
 import { firestore } from "../../firebase/admin"
 import { useRouter } from "next/router"
-
+import ArrowLeft from "components/Icons/ArrowLeft"
 export default function AlweetPage(props) {
   const router = useRouter()
 
@@ -9,8 +9,30 @@ export default function AlweetPage(props) {
 
   return (
     <>
+      <div className=".header">
+        <ArrowLeft onClick={() => router.push("/home")} />
+        <h2>{props.userName && `Alweet of ${props.userName}`}</h2>
+      </div>
       <Alweet {...props}></Alweet>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .header {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          width: 100%;
+          height: 50px;
+          flex-direction: column;
+        }
+
+        h2 {
+          margin: 0;
+          padding: 0;
+          font-size: 25px;
+          position: absolute;
+          top: 15px;
+          left: 65px;
+        }
+      `}</style>
     </>
   )
 }
