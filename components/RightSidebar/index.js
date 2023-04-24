@@ -1,46 +1,11 @@
 import React from "react"
-import Link from "next/link"
-import { Binary } from "lucide-react"
-import { useRouter } from "next/router"
-
 import { colors } from "styles/theme"
-import useUser from "hooks/useUser"
-import Avatar from "components/Avatar"
+
 export default function Sidebar({ items }) {
-  const router = useRouter()
-  const user = useUser()
   return (
     <>
       <aside>
-        <ul>
-          <Link href="/home">
-            <a>
-              <Binary size={30} color={colors.primary} />
-            </a>
-          </Link>
-          {items?.map((item) => {
-            return (
-              <li key={item.link}>
-                <Link href={item.link}>
-                  <a>
-                    <item.icon size={30} />
-                    <span>{item.text}</span>
-                  </a>
-                </Link>
-              </li>
-            )
-          })}
-          <button onClick={() => router.push("/compose/alweet")}>Alweet</button>
-        </ul>
-        {user && (
-          <div onClick={() => router.push("/profile")}>
-            <Avatar withText={false} alt={user?.username} src={user?.avatar} />
-            <span className="user-details">
-              <strong>{user.username}</strong>
-              <small>{user.email}</small>
-            </span>
-          </div>
-        )}
+        Work in progress 😁
       </aside>
 
       <style jsx>
