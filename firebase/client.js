@@ -14,7 +14,9 @@ import {
   orderBy,
   query,
   onSnapshot,
-  limit
+  limit,
+  doc,
+  getDoc
 } from "firebase/firestore"
 import { getStorage, ref, uploadBytesResumable } from "firebase/storage"
 
@@ -68,9 +70,7 @@ export const addAlweet = async ({ content, avatar, userId, img, userName }) => {
     img
   })
 }
-// export const getAlweetFromUser = async (userId) => {
-//   return await
-// }
+
 const mapAlweetFromFirebaseToAlweetObject = (doc) => {
   const data = doc.data()
   const id = doc.id
@@ -109,6 +109,18 @@ export const getAlweetsFromUser = (userId, handleUserAlweets) => {
   })
 
   return snapShot
+}
+
+export const getAlweet = async (id) => {
+  const docRef = await doc(database, `/alweets/${id}`)
+  const alweet = (await getDoc(docRef)).data()
+  const alweetId = docRef.id
+  const { createdAt } = alweet
+  return {
+    ...alweet,
+    id: alweetId,
+    createdAt: +createdAt.toDate()
+  }
 }
 
 // export const fetchLatestAlweets = async () => {

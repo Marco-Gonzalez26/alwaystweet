@@ -9,7 +9,6 @@ import Avatar from "components/Avatar"
 export default function Sidebar({ items }) {
   const router = useRouter()
   const user = useUser()
-  console.log({ user })
   return (
     <>
       <aside>

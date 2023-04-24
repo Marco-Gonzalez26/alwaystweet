@@ -12,7 +12,6 @@ export default (req, res) => {
       const data = doc.data()
       const id = doc.id
       const { createdAt } = data
-      console.log({ data })
       res.json({
         ...data,
         id,

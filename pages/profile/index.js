@@ -8,12 +8,10 @@ import { colors } from "styles/theme"
 
 function ProfilePage() {
   const [userAlweets, setUserAlweets] = useState([])
-  console.log(userAlweets)
   const user = useUser()
   useEffect(() => {
     let unsuscribe
     if (user) {
-      console.log(user)
       unsuscribe = getAlweetsFromUser(user?.uid, setUserAlweets)
     }
 
@@ -63,13 +61,12 @@ function ProfilePage() {
 
       <style jsx>
         {`
-
-        section {
-          height: 100%;
-          width: 100%;
-          display: flex;
-          flex-direction: column
-        }
+          section {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+          }
           .user-profile {
             width: 100%;
             background: ${colors.white};
@@ -81,7 +78,7 @@ function ProfilePage() {
             width: 20%;
           }
 
-          .user-profile-bg{
+          .user-profile-bg {
             width: 100%;
             background: ${colors.primary};
             height: 100px;
