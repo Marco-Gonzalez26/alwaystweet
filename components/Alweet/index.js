@@ -12,10 +12,10 @@ export default function Alweet({
   id,
   createdAt
 }) {
-  const timeago = useTimeAgo(createdAt)
+  // const timeago = useTimeAgo(createdAt)
 
   const router = useRouter()
-  const title = useDateTimeFormat(createdAt)
+  // const title = useDateTimeFormat(createdAt)
 
   const handleArticleClick = (e) => {
     e.preventDefault()
@@ -34,9 +34,9 @@ export default function Alweet({
             <span>.</span>
             <Link href={`/status/${id}`}>
               <a className="time">
-                <time title={title} className="date">
+                {/* <time title={title} className="date">
                   {timeago}
-                </time>
+                </time> */}
               </a>
             </Link>
           </header>
@@ -61,7 +61,7 @@ export default function Alweet({
           }
           img {
             height: auto;
-            width: 100%;
+            width: 50%;
             border-radius: 10px;
             margin-top: 10px;
           }

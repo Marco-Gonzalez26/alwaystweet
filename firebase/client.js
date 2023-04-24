@@ -9,6 +9,7 @@ import {
   getFirestore,
   collection,
   addDoc,
+  where,
   Timestamp,
   orderBy,
   query,
@@ -67,7 +68,9 @@ export const addAlweet = async ({ content, avatar, userId, img, userName }) => {
     img
   })
 }
-
+// export const getAlweetFromUser = async (userId) => {
+//   return await
+// }
 const mapAlweetFromFirebaseToAlweetObject = (doc) => {
   const data = doc.data()
   const id = doc.id
@@ -80,7 +83,7 @@ const mapAlweetFromFirebaseToAlweetObject = (doc) => {
   }
 }
 
-export const listenLatestAlweets = (handeNewAlweets) => {
+export const listenLatestAlweets = (handleNewAlweets) => {
   const q = query(
     collection(database, "alweets"),
     orderBy("createdAt", "desc"),
@@ -88,7 +91,21 @@ export const listenLatestAlweets = (handeNewAlweets) => {
   )
   const snapShot = onSnapshot(q, async ({ docs }) => {
     const newAlweets = docs.map(mapAlweetFromFirebaseToAlweetObject)
-    handeNewAlweets(newAlweets)
+    handleNewAlweets(newAlweets)
+  })
+
+  return snapShot
+}
+
+export const getAlweetsFromUser = (userId, handleUserAlweets) => {
+  const q = query(
+    collection(database, "alweets"),
+    where("userId", "==", userId)
+  )
+
+  const snapShot = onSnapshot(q, async ({ docs }) => {
+    const userAlweets = docs.map(mapAlweetFromFirebaseToAlweetObject)
+    handleUserAlweets(userAlweets)
   })
 
   return snapShot

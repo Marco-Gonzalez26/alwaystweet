@@ -35,7 +35,6 @@ export default function ComposeAlweet() {
   const user = useUser()
   const inputRef = useRef()
 
-  console.log(user)
   useEffect(() => {
     if (task) {
       const onProgress = () => {}

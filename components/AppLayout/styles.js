@@ -29,17 +29,18 @@ export const globalStyles = css.global`
 
 export default css`
   div {
+    background: black;
     display: grid;
     height: 100vh;
-    place-items: center;
+    grid-template-columns: repeat(4 ,1fr) ;  
+    width: 100%;
   }
 
   main {
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    grid-column: 2 / span 2;
     height: 100%;
-    width: 100%;
+    min-width: 100%;
     position: relative;
     overflow-y: auto;
     display: flex;
@@ -48,8 +49,8 @@ export default css`
 
   @media (min-width: ${breakPoints.mobile}) {
     main {
-      width: ${breakPoints.mobile};
-      height: 90vh;
+      width: 65%;
+      height: 100vh;
     }
   }
 `

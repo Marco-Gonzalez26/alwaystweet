@@ -6,7 +6,7 @@ import useUser from "../../hooks/useUser"
 import Head from "next/head"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { colors } from "styles/theme"
+import { breakPoints, colors } from "styles/theme"
 import { listenLatestAlweets } from "../../firebase/client"
 
 export default function HomePage() {
@@ -114,6 +114,12 @@ export default function HomePage() {
           }
           nav:hover > :global(svg) {
             stroke: ${colors.primary};
+          }
+
+          @media (min-width: ${breakPoints.mobile}) {
+            nav {
+              display: none;
+            }
           }
         `}
       </style>

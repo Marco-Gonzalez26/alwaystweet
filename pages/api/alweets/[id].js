@@ -12,12 +12,14 @@ export default (req, res) => {
       const data = doc.data()
       const id = doc.id
       const { createdAt } = data
-
+      console.log({ data })
       res.json({
         ...data,
         id,
         createdAt: +createdAt.toDate()
       })
+
+      res.status(200)
     })
     .catch(() => {
       res.status(404).end()
