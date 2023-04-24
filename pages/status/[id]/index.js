@@ -8,7 +8,6 @@ import ArrowLeft from "components/Icons/ArrowLeft"
 
 export default function AlweetPage(props) {
   const router = useRouter()
-  console.log({ props })
   if (router.isFallback) return <h1>Cargando...</h1>
 
   return (
@@ -44,7 +43,7 @@ export default function AlweetPage(props) {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { id: "2v6O59t32Pr9Kxt1cykC" } }],
+    paths: [{ params: { id: "EMofFsrJyLNIQKxPdwzi" } }],
     fallback: "blocking"
   }
 }
@@ -52,7 +51,6 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { params } = context
   const { id } = params
-  console.log({ id })
   const alweet = await getAlweet(id)
 
   return { props: { ...alweet } }
