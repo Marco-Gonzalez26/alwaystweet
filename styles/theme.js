@@ -10,5 +10,6 @@ export const colors = {
   primary: "#0099ff",
   secondary: "#1c5480",
   black: "#000",
-  white: "#fff"
+  white: "#fff",
+  lightGray: '#666'
 }
