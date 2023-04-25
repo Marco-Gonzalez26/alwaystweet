@@ -14,9 +14,7 @@ export default function Sidebar({ items }) {
       <aside>
         <ul>
           <Link href="/home">
-            <a>
-              <Binary size={30} color={colors.primary} />
-            </a>
+            <Binary size={30} color={colors.primary} />
           </Link>
           {items?.map((item) => {
             return (
@@ -30,8 +28,8 @@ export default function Sidebar({ items }) {
               </li>
             )
           })}
-          <button onClick={() => router.push("/compose/alweet")}>Alweet</button>
         </ul>
+        <button onClick={() => router.push("/compose/alweet")}>Alweet</button>
         {user && (
           <div onClick={() => router.push("/profile")}>
             <Avatar withText={false} alt={user?.username} src={user?.avatar} />
@@ -70,14 +68,21 @@ export default function Sidebar({ items }) {
           a {
             text-decoration: none;
             color: #000;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 1rem;
+
+            padding: 10px;
+            border-radius: 1rem;
+            transition: all 0.2s ease;
+          }
+          a:hover {
+            background: #eee;
           }
 
-          span {
+          li > a > span {
             font-size: 1.25rem;
-            font-weight: 400;
+            font-weight: 500;
           }
           /* Alweet button */
           button {
@@ -111,6 +116,7 @@ export default function Sidebar({ items }) {
           div:hover {
             cursor: pointer;
             background: #eee;
+            color: ${colors.primary};
           }
           .user-details {
             display: flex;
@@ -122,7 +128,7 @@ export default function Sidebar({ items }) {
           }
           small {
             font-size: 16px;
-            color: #666;
+            color: ${colors.lightGray};
           }
 
           @media (min-width: 640px) {

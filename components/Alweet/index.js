@@ -10,7 +10,8 @@ export default function Alweet({
   userName,
   content,
   id,
-  createdAt
+  createdAt,
+  border
 }) {
   const timeago = useTimeAgo(createdAt)
 
@@ -24,7 +25,6 @@ export default function Alweet({
 
   return (
     <>
- 
       <article key={id} onClick={handleArticleClick}>
         <div>
           <Avatar src={avatar} alt={userName} />
@@ -41,7 +41,7 @@ export default function Alweet({
               </a>
             </Link>
           </header>
-          
+
           <p>{content}</p>
           {img && <img src={img} />}
         </section>
@@ -52,6 +52,7 @@ export default function Alweet({
             border-bottom: 2px solid #eee;
             padding: 10px 10px;
             display: flex;
+            border-top: ${border};
           }
 
           article:hover {
@@ -63,9 +64,10 @@ export default function Alweet({
           }
           img {
             height: auto;
-            width: 70%;
-            object-fit:contain;
-     border-radius: 10px;
+            max-height: 900px;
+            width: 100%;
+            object-fit: contain;
+            border-radius: 10px;
             margin-top: 10px;
           }
           p {

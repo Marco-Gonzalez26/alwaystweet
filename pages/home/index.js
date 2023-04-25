@@ -8,6 +8,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { breakPoints, colors } from "styles/theme"
 import { listenLatestAlweets } from "../../firebase/client"
+import Header from "components/Header"
 
 export default function HomePage() {
   const [timeline, setTimeline] = useState([])
@@ -28,11 +29,9 @@ export default function HomePage() {
       <Head>
         <title>Home / AlwaysTweet</title>
       </Head>
-      <header>
-        <h2>Home</h2>
-      </header>
+      <Header text="Home" />
       <section>
-        {timeline.map((alweet) => {
+        {timeline.map((alweet, index) => {
           return (
             <Alweet
               key={alweet.id}
@@ -82,11 +81,11 @@ export default function HomePage() {
           nav {
             position: sticky;
             bottom: -1px;
-            min-height: 49px;
+            min-height: 50px;
             border-top: 1px solid #eee;
             width: 100%;
             background: #fff;
-            display: flex;
+            display: none;
           }
           section {
             margin-top: 10px;
@@ -116,9 +115,9 @@ export default function HomePage() {
             stroke: ${colors.primary};
           }
 
-          @media (min-width: ${breakPoints.mobile}) {
+          @media (max-width: ${breakPoints.mobile}) {
             nav {
-              display: none;
+              display: flex;
             }
           }
         `}

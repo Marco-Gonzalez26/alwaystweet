@@ -5,10 +5,15 @@ import useUser from "../../hooks/useUser"
 import { getAlweetsFromUser } from "../../firebase/client"
 import Alweet from "components/Alweet"
 import { colors } from "styles/theme"
+import Header from "components/Header"
+import { useRouter } from "next/router"
+import { ArrowLeft } from "lucide-react"
 
 function ProfilePage() {
   const [userAlweets, setUserAlweets] = useState([])
   const user = useUser()
+  const router = useRouter()
+
   useEffect(() => {
     let unsuscribe
     if (user) {
@@ -22,20 +27,37 @@ function ProfilePage() {
   return (
     <section>
       <Head>
-        <title>Profile | {user?.username}</title>
+        <title>
+          {user?.username} ({user?.email}) / Alweet
+        </title>
       </Head>
       {user ? (
         <>
+          <Header>
+            <div className="header-content">
+              <button onClick={() => router.push("/")}>
+                <ArrowLeft width={20}/>
+              </button>
+              <h2>{user?.username}</h2>
+              <span>{userAlweets?.length} alweets</span>
+            </div>
+          </Header>
           <div className="user-profile">
             <div className="user-profile-bg"></div>
             <img
               alt={user.username}
               src={user.avatar}
               referrerPolicy="no-referrer"
-              className="rounded-full"
             />
+            <div className="divider" />
+            <div className="user-details">
+              <span>{user.username}</span>
+              <p>{user.email}</p>
+            </div>
           </div>
-          {userAlweets.map((alweet) => {
+          {userAlweets.map((alweet, index) => {
+            const firstBorder = index === 0 ? `2px solid #eee` : ""
+
             return (
               <Alweet
                 key={alweet.id}
@@ -46,6 +68,7 @@ function ProfilePage() {
                 userId={alweet.userId}
                 createdAt={alweet.createdAt}
                 img={alweet.img}
+                border={firstBorder}
               />
             )
           })}
@@ -67,6 +90,8 @@ function ProfilePage() {
             display: flex;
             flex-direction: column;
           }
+
+          /*User profile*/
           .user-profile {
             width: 100%;
             background: ${colors.white};
@@ -76,14 +101,54 @@ function ProfilePage() {
             border: 4px solid ${colors.white};
             border-radius: 9999px;
             width: 20%;
+            margin-left: 1rem;
+            position: absolute;
+            top: 90px;
           }
 
           .user-profile-bg {
             width: 100%;
             background: ${colors.primary};
+            height: 150px;
+          }
+          .user-details {
+            width: 100%;
+            background: ${colors.white};
+            padding: 1rem;
             height: 100px;
           }
 
+          .user-details > span {
+            font-size: 20px;
+            font-weight: 700;
+          }
+          .user-details > p {
+            font-size: 16px;
+            color: #666;
+          }
+
+          .divider {
+            width: 100%;
+            height: 60px;
+          }
+
+          button {
+            border: none;
+            background: none;
+            cursor: pointer;
+          }
+
+          .header-content {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            height: auto;
+            gap: 16px;
+          }
+
+          .header-content > span {
+            color: #666;
+          }
           /*Loader */
           .lds-ellipsis {
             display: inline-block;

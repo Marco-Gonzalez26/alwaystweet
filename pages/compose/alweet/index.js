@@ -8,7 +8,8 @@ import Head from "next/head"
 import { getDownloadURL } from "firebase/storage"
 import Picture from "components/Icons/Picture"
 import { colors } from "styles/theme"
-import ArrowLeft from "components/Icons/ArrowLeft"
+import { X, ArrowLeft } from "lucide-react"
+import Header from "components/Header"
 
 const COMPOSE_STATES = {
   USER_NOT_KNOWN: 0,
@@ -33,9 +34,13 @@ export default function ComposeAlweet() {
   const [imgURL, setImgURL] = useState(null)
   const router = useRouter()
   const user = useUser()
+
+  // Refs to dom elements
   const inputRef = useRef()
+  const textareaRef = useRef()
 
   useEffect(() => {
+    textareaRef.current.focus()
     if (task) {
       const onProgress = () => {}
       const onError = () => {}
@@ -89,6 +94,10 @@ export default function ComposeAlweet() {
     const task = uploadImage(e.dataTransfer.files[0])
     setTask(task)
   }
+  const handleFileInputChange = (e) => {
+    const task = uploadImage(e.target.files[0])
+    setTask(task)
+  }
 
   // // const handleFiles = (e) => {
   // //   e.preventDefault()
@@ -108,9 +117,9 @@ export default function ComposeAlweet() {
       <Head>
         <title>Make an Alweet / AlwaysTweet</title>
       </Head>
-      <div className="header">
+      <Header>
         <ArrowLeft onClick={() => router.push("/home")} />
-      </div>
+      </Header>
       <section className="form-container">
         {user && (
           <section className="avatar-container">
@@ -125,10 +134,13 @@ export default function ComposeAlweet() {
             onDrop={handleDrop}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
+            ref={textareaRef}
           ></textarea>
           {imgURL && (
             <section className="remove-img">
-              <button onClick={() => setImgURL(null)}>x</button>
+              <button onClick={() => setImgURL(null)}>
+                <X />
+              </button>
               <img src={imgURL} />
             </section>
           )}
@@ -138,7 +150,14 @@ export default function ComposeAlweet() {
               <label htmlFor="file-input">
                 <Picture />
               </label>
-              <input id="file-input" name="files[]" ref={inputRef} />
+              <input
+                type="file"
+                accept="image/*"
+                id="file-input"
+                name="files[]"
+                onChange={handleFileInputChange}
+                ref={inputRef}
+              />
             </div>
           </div>
         </form>
@@ -159,6 +178,9 @@ export default function ComposeAlweet() {
             height: 32px;
             background: rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
           form {
             padding: 10px;
@@ -206,7 +228,7 @@ export default function ComposeAlweet() {
             height: auto;
           }
           .image-upload > input {
-            display: none;
+            opacity: 0;
             pointer-events: none;
           }
 
