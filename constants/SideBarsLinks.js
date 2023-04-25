@@ -16,7 +16,7 @@ export const leftBarItems = [
   {
     link: '/save',
     icon: Bookmark,
-    text: 'Text'
+    text: 'Saved'
   }, 
   {
     link: '/profile',
