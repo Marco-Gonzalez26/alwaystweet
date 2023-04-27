@@ -15,7 +15,7 @@ export default function useUser() {
   }, [])
 
   useEffect(() => {
-    user === USER_STATES.NOT_LOGGED && router.push("/")
+    user === USER_STATES.NOT_LOGGED && router.push("/login")
   }, [user])
 
   return user
