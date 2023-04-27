@@ -1,12 +1,15 @@
+import useUser from "hooks/useUser"
 import React from "react"
 import { colors } from "styles/theme"
 
 export default function Sidebar({ items }) {
+  const user = useUser()
+
+  if (!user) return null
+
   return (
     <>
-      <aside>
-        Work in progress 😁
-      </aside>
+      <aside>Work in progress 😁</aside>
 
       <style jsx>
         {`

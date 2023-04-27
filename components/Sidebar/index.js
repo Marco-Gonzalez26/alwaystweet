@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import { Binary } from "lucide-react"
 import { useRouter } from "next/router"
@@ -6,9 +6,20 @@ import { useRouter } from "next/router"
 import { colors } from "styles/theme"
 import useUser from "hooks/useUser"
 import Avatar from "components/Avatar"
+import Tooltip from "components/Tooltip"
+import { logout } from "../../firebase/client"
+
 export default function Sidebar({ items }) {
   const router = useRouter()
   const user = useUser()
+  const [openToolTip, setOpenTooltip] = useState(false)
+  const handleLogout = () => {
+    logout().then(() => {
+      router.push("/login")
+    })
+  }
+
+  if (!user) return null
   return (
     <>
       <aside>
@@ -31,13 +42,20 @@ export default function Sidebar({ items }) {
         </ul>
         <button onClick={() => router.push("/compose/alweet")}>Alweet</button>
         {user && (
-          <div onClick={() => router.push("/profile")}>
-            <Avatar withText={false} alt={user?.username} src={user?.avatar} />
-            <span className="user-details">
-              <strong>{user.username}</strong>
-              <small>{user.email}</small>
-            </span>
-          </div>
+          <>
+            {openToolTip ? <Tooltip handleClick={handleLogout} /> : null}
+            <div onClick={handleLogout}>
+              <Avatar
+                withText={false}
+                alt={user?.username}
+                src={user?.avatar}
+              />
+              <span className="user-details">
+                <strong>{user.username}</strong>
+                <small>{user.email}</small>
+              </span>
+            </div>
+          </>
         )}
       </aside>
 
@@ -112,6 +130,7 @@ export default function Sidebar({ items }) {
             padding: 1rem;
             border-radius: 9999px;
             transition: all ease 0.2s;
+            position: relative;
           }
           div:hover {
             cursor: pointer;
