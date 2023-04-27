@@ -14,7 +14,7 @@ export const leftBarItems = [
     text: 'Home'
   },
   {
-    link: '/save',
+    link: '/saved',
     icon: Bookmark,
     text: 'Saved'
   }, 
