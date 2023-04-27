@@ -43,7 +43,12 @@ export default function Sidebar({ items }) {
         <button onClick={() => router.push("/compose/alweet")}>Alweet</button>
         {user && (
           <>
-            {openToolTip ? <Tooltip handleClick={handleLogout} /> : null}
+            {openToolTip ? (
+              <Tooltip
+                handleClick={handleLogout}
+                setOpenTooltip={setOpenTooltip}
+              />
+            ) : null}
             <div onClick={handleLogout}>
               <Avatar
                 withText={false}
