@@ -35,8 +35,8 @@ function ProfilePage() {
         <>
           <Header>
             <div className="header-content">
-              <button onClick={() => router.push("/")}>
-                <ArrowLeft width={20}/>
+              <button onClick={() => router.push("/login")}>
+                <ArrowLeft width={20} />
               </button>
               <h2>{user?.username}</h2>
               <span>{userAlweets?.length} alweets</span>
@@ -55,23 +55,25 @@ function ProfilePage() {
               <p>{user.email}</p>
             </div>
           </div>
-          {userAlweets.map((alweet, index) => {
-            const firstBorder = index === 0 ? `2px solid #eee` : ""
+          {[...userAlweets]
+            .sort((a, b) => b.createdAt - a.createdAt)
+            .map((alweet, index) => {
+              const firstBorder = index === 0 ? `2px solid #eee` : ""
 
-            return (
-              <Alweet
-                key={alweet.id}
-                userName={alweet.userName}
-                avatar={alweet.avatar}
-                content={alweet.content}
-                id={alweet.id}
-                userId={alweet.userId}
-                createdAt={alweet.createdAt}
-                img={alweet.img}
-                border={firstBorder}
-              />
-            )
-          })}
+              return (
+                <Alweet
+                  key={alweet.id}
+                  userName={alweet.userName}
+                  avatar={alweet.avatar}
+                  content={alweet.content}
+                  id={alweet.id}
+                  userId={alweet.userId}
+                  createdAt={alweet.createdAt}
+                  img={alweet.img}
+                  border={firstBorder}
+                />
+              )
+            })}
         </>
       ) : (
         <div className="lds-ellipsis">
@@ -103,7 +105,8 @@ function ProfilePage() {
             width: 20%;
             margin-left: 1rem;
             position: absolute;
-            top: 90px;
+            top: 20%;
+            z-index: 0;
           }
 
           .user-profile-bg {
