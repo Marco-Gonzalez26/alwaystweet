@@ -29,7 +29,7 @@ export const globalStyles = css.global`
 
 export default css`
   div {
-    background: black;
+    background: ${colors.white};
     display: grid;
     height: 100vh;
     grid-template-columns: repeat(4, 1fr);
@@ -45,13 +45,17 @@ export default css`
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    border-left: 1px #d3d3d3 solid;
-    border-right: 1px #d3d3d3 solid;
+    /* border-left: 1px #d3d3d3 solid;
+    border-right: 1px #d3d3d3 solid; */
   }
 
   @media (max-width: ${breakPoints.mobile}) {
     div {
       grid-template-columns: repeat(1, 1fr);
+      background: red;
+    }
+    main {
+      grid-column: 1 / span 2;
     }
     main {
       width: 100%;

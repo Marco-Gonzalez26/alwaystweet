@@ -23,6 +23,7 @@ export default function Sidebar({ items }) {
             justify-content: space-between;
             padding: 1rem;
             display: none;
+            border-left: 1px solid #eee
           }
 
           ul {

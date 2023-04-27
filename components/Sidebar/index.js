@@ -13,13 +13,14 @@ export default function Sidebar({ items }) {
   const router = useRouter()
   const user = useUser()
   const [openToolTip, setOpenTooltip] = useState(false)
+
   const handleLogout = () => {
     logout().then(() => {
       router.push("/login")
     })
   }
-
   if (!user) return null
+
   return (
     <>
       <aside>
@@ -76,6 +77,8 @@ export default function Sidebar({ items }) {
             justify-content: space-between;
             padding: 1rem;
             display: none;
+            border-right: 1px solid #eee
+
           }
 
           ul {
