@@ -21,6 +21,7 @@ function Header({ text, children, styles }) {
             background: #ffffffaa;
             backdrop-filter: blur(5px);
             padding: 16px;
+            z-index: 100;
           }
           h2 {
             font-size: 20px;
