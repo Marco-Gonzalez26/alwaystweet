@@ -3,7 +3,8 @@ import {
   getAuth,
   signInWithPopup,
   GithubAuthProvider,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  signOut
 } from "firebase/auth"
 import {
   getFirestore,
@@ -58,6 +59,17 @@ export const loginWithGoogle = () => {
     .then(mapUserFromFirebaseAuthToUser)
     .catch((e) => console.log(e))
 }
+
+export const logout = () => {
+  return signOut(auth)
+    .then((value) => {
+      console.log("Logout successfully", value)
+    })
+    .catch((e) => {
+      console.log("There was a problem login out", e)
+    })
+}
+
 export const addAlweet = async ({ content, avatar, userId, img, userName }) => {
   return await addDoc(collection(database, "alweets"), {
     avatar,
