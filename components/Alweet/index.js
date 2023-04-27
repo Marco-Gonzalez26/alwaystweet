@@ -32,7 +32,6 @@ export default function Alweet({
         <section>
           <header>
             <strong>{userName}</strong>
-            <span>.</span>
             <Link href={`/status/${id}`}>
               <a className="time">
                 <time title={title} className="date">
@@ -43,11 +42,14 @@ export default function Alweet({
           </header>
 
           <p>{content}</p>
-          {img && <img src={img} />}
+          <div className="alweet-img-container">{img && <img src={img} />}</div>
         </section>
       </article>
       <style jsx>
         {`
+          section {
+            width: 100%;
+          }
           article {
             border-bottom: 2px solid #eee;
             padding: 10px 10px;
@@ -62,11 +64,19 @@ export default function Alweet({
           div {
             padding-right: 10px;
           }
+
+          .alweet-img-container {
+            width: 100%;
+            height: auto;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+          }
           img {
             height: auto;
-            max-height: 900px;
-            width: 100%;
-            object-fit: contain;
+            max-height: 500px;
+            max-width: 500px;
+            object-fit: cover;
             border-radius: 10px;
             margin-top: 10px;
           }
