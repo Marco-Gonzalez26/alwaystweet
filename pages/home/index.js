@@ -85,7 +85,7 @@ export default function HomePage() {
             width: 100%;
             background: #fff;
             display: flex;
-            padding-bottom: 3em;
+            padding-bottom: 3rem;
           }
           section {
             margin-top: 10px;
@@ -118,7 +118,7 @@ export default function HomePage() {
 
           @media (min-width: ${breakPoints.mobile}) {
             nav {
-              display: 'none',;
+              display: none;
             }
           }
         `}
