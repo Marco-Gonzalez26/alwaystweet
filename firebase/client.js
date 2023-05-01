@@ -33,6 +33,7 @@ const storage = getStorage(app)
 
 const mapUserFromFirebaseAuthToUser = (user) => {
   const { displayName, email, photoURL, uid } = user
+  console.log({ user })
   return {
     avatar: photoURL,
     username: displayName,
@@ -82,6 +83,7 @@ export const addAlweet = async ({ content, avatar, userId, img, userName }) => {
     img
   })
 }
+export const saveAlweetToBookmarks = async () => {}
 
 const mapAlweetFromFirebaseToAlweetObject = (doc) => {
   const data = doc.data()

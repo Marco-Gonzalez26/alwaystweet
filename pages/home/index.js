@@ -13,7 +13,7 @@ import Header from "components/Header"
 export default function HomePage() {
   const [timeline, setTimeline] = useState([])
   const user = useUser()
-
+  
   useEffect(() => {
     let unsuscribe
     if (user) {
@@ -81,11 +81,11 @@ export default function HomePage() {
           nav {
             position: sticky;
             bottom: -1px;
-            min-height: 50px;
             border-top: 1px solid #eee;
             width: 100%;
             background: #fff;
             display: none;
+            padding-bottom: 3em;
           }
           section {
             margin-top: 10px;
@@ -104,6 +104,7 @@ export default function HomePage() {
             flex: 1 1 auto;
             justify-content: center;
             align-items: center;
+            padding: 0.5rem;
           }
 
           nav a:hover {

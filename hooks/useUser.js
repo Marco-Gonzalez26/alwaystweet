@@ -9,7 +9,7 @@ export const USER_STATES = {
 export default function useUser() {
   const [user, setUser] = useState(USER_STATES.NOT_KNOWN)
   const router = useRouter()
-
+  console.log({ user })
   useEffect(() => {
     onAuthStateChanged(setUser)
   }, [])

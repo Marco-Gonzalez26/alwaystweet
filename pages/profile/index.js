@@ -13,7 +13,7 @@ function ProfilePage() {
   const [userAlweets, setUserAlweets] = useState([])
   const user = useUser()
   const router = useRouter()
-
+  console.log('profile',{ user })
   useEffect(() => {
     let unsuscribe
     if (user) {

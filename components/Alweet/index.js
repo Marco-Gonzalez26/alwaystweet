@@ -75,7 +75,7 @@ export default function Alweet({
           img {
             height: auto;
             max-height: 500px;
-            max-width: 500px;
+            max-width: 400px;
             object-fit: cover;
             border-radius: 10px;
             margin-top: 10px;
@@ -97,6 +97,13 @@ export default function Alweet({
 
           .time:hover {
             text-decoration: wavy underline #09f;
+          }
+
+          @media (min-width: 640px) {
+            img {
+              max-height: 500px;
+              max-width: 500px;
+            }
           }
         `}
       </style>

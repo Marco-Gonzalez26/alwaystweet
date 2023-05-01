@@ -1,9 +1,11 @@
-import React from "react"
 
 function Header({ text, children, styles }) {
   return (
     <>
       <header style={styles}>
+        {/* <div className="avatar-container">
+          <Avatar withText={false} alt={user?.username} src={user?.avatar} />
+        </div> */}
         {children}
         <h2>{text}</h2>
       </header>
@@ -14,14 +16,14 @@ function Header({ text, children, styles }) {
             position: sticky;
             display: flex;
             align-items: center;
-            height: 49px;
             border-bottom: 1px solid #eee;
             top: 0;
             width: 100%;
             background: #ffffffaa;
             backdrop-filter: blur(5px);
-            padding: 16px;
+            padding: 10px;
             z-index: 100;
+            
           }
           h2 {
             font-size: 20px;
