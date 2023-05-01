@@ -11,11 +11,8 @@ function MobileNavbar() {
     try {
       document.createEvent("TouchEvent")
       setTouchDevice(true)
-      console.log("Touch device")
     } catch (error) {
       setTouchDevice(false)
-
-      console.log("Mouse device")
     }
   }, [])
   
@@ -49,7 +46,7 @@ function MobileNavbar() {
             height: auto;
             background: #fff;
             display: flex;
-            padding-bottom: ${touchDevice ? "30%" : "0px"};
+            padding-bottom: ${touchDevice ? "25%" : "0px"};
           }
 
           nav a {
