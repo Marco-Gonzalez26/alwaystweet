@@ -52,7 +52,7 @@ export default function HomePage() {
             <Home stroke="#09f" height={32} width={32} />
           </a>
         </Link>
-        <Link href="/search">
+        <Link href="/">
           <a>
             <Search stroke="#09f" height={32} width={32} />
           </a>
