@@ -75,7 +75,7 @@ export default function Alweet({
           img {
             height: auto;
             max-height: 500px;
-            max-width: 400px;
+            max-width: 250px;
             object-fit: cover;
             border-radius: 10px;
             margin-top: 10px;
