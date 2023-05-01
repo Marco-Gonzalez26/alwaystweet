@@ -33,7 +33,6 @@ const storage = getStorage(app)
 
 const mapUserFromFirebaseAuthToUser = (user) => {
   const { displayName, email, photoURL, uid } = user
-  console.log({ user })
   return {
     avatar: photoURL,
     username: displayName,

@@ -1,12 +1,10 @@
 import Alweet from "components/Alweet"
-import Create from "components/Icons/Create"
-import Home from "components/Icons/Home"
-import Search from "components/Icons/Search"
+
 import useUser from "../../hooks/useUser"
 import Head from "next/head"
-import Link from "next/link"
+
 import { useEffect, useState } from "react"
-import { breakPoints, colors } from "styles/theme"
+import MobileNavbar from "components/MobileNavbar"
 import { listenLatestAlweets } from "../../firebase/client"
 import Header from "components/Header"
 
@@ -46,23 +44,7 @@ export default function HomePage() {
           )
         })}
       </section>
-      <nav>
-        <Link href="/home">
-          <a>
-            <Home stroke="#09f" height={32} width={32} />
-          </a>
-        </Link>
-        <Link href="/">
-          <a>
-            <Search stroke="#09f" height={32} width={32} />
-          </a>
-        </Link>
-        <Link href="/compose/alweet">
-          <a>
-            <Create stroke="#09f" height={32} width={32} />
-          </a>
-        </Link>
-      </nav>
+      <MobileNavbar />
 
       <style jsx>
         {`
@@ -78,16 +60,6 @@ export default function HomePage() {
             backdrop-filter: blur(5px);
           }
 
-          nav {
-            position: sticky;
-            bottom: -1px;
-            border-top: 1px solid #eee;
-            width: 100%;
-            height: auto;
-            background: #fff;
-            display: flex;
-            padding-bottom: 30%;
-          }
           section {
             margin-top: 10px;
             height: auto;
@@ -98,29 +70,6 @@ export default function HomePage() {
             font-size: 20px;
             font-weight: 800;
             padding-left: 15px;
-          }
-
-          nav a {
-            display: flex;
-            flex: 1 1 auto;
-            justify-content: center;
-            align-items: center;
-            padding: 0.5rem;
-          }
-
-          nav a:hover {
-            background: radial-gradient(#0099ff33 15%, transparent 16%);
-            background-size: 180px 180px;
-            background-position: center;
-          }
-          nav:hover > :global(svg) {
-            stroke: ${colors.primary};
-          }
-
-          @media (min-width: ${breakPoints.mobile}) {
-            nav {
-              display: none;
-            }
           }
         `}
       </style>
