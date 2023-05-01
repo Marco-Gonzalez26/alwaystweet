@@ -13,7 +13,7 @@ import Header from "components/Header"
 export default function HomePage() {
   const [timeline, setTimeline] = useState([])
   const user = useUser()
-  
+
   useEffect(() => {
     let unsuscribe
     if (user) {
@@ -83,9 +83,10 @@ export default function HomePage() {
             bottom: -1px;
             border-top: 1px solid #eee;
             width: 100%;
+            height: auto;
             background: #fff;
             display: flex;
-            padding-bottom: 4rem;
+            padding-bottom: 6rem;
           }
           section {
             margin-top: 10px;
