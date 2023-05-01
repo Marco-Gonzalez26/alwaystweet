@@ -85,7 +85,7 @@ export default function HomePage() {
             width: 100%;
             background: #fff;
             display: flex;
-            padding-bottom: 3rem;
+            padding-bottom: 4rem;
           }
           section {
             margin-top: 10px;
