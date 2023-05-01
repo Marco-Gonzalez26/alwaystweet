@@ -84,7 +84,7 @@ export default function HomePage() {
             border-top: 1px solid #eee;
             width: 100%;
             background: #fff;
-            display: none;
+            display: flex;
             padding-bottom: 3em;
           }
           section {
@@ -116,9 +116,9 @@ export default function HomePage() {
             stroke: ${colors.primary};
           }
 
-          @media (max-width: ${breakPoints.mobile}) {
+          @media (min-width: ${breakPoints.mobile}) {
             nav {
-              display: flex;
+              display: 'none',;
             }
           }
         `}
