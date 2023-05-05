@@ -70,7 +70,7 @@ export const logout = () => {
     })
 }
 
-export const addAlweet = async ({ content, avatar, userId, img, userName }) => {
+export const addAlweet = async ({ content, avatar, userId, imgs, userName }) => {
   return await addDoc(collection(database, "alweets"), {
     avatar,
     userId,
@@ -79,7 +79,7 @@ export const addAlweet = async ({ content, avatar, userId, img, userName }) => {
     createdAt: Timestamp.fromDate(new Date()),
     likesCount: 0,
     sharedCount: 0,
-    img
+    imgs
   })
 }
 export const saveAlweetToBookmarks = async () => {}
@@ -156,6 +156,7 @@ export const getAlweet = async (id) => {
 // }
 
 export const uploadImage = (file) => {
+  
   const imgRef = ref(storage, `images/${file.name}`)
   return uploadBytesResumable(imgRef, file)
 }

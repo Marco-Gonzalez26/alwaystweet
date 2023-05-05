@@ -39,7 +39,7 @@ export default function HomePage() {
               id={alweet.id}
               userId={alweet.userId}
               createdAt={alweet.createdAt}
-              img={alweet.img}
+              imgs={alweet.imgs}
             />
           )
         })}

@@ -31,7 +31,9 @@ export default function ComposeAlweet() {
   const [status, setStatus] = useState(COMPOSE_STATES.USER_NOT_KNOWN)
   const [drag, setDrag] = useState(DRAG_IMAGES_STATES.NONE)
   const [task, setTask] = useState(null)
-  const [imgURL, setImgURL] = useState(null)
+
+  const [imgURLS, setImgURLS] = useState([])
+
   const router = useRouter()
   const user = useUser()
 
@@ -39,21 +41,27 @@ export default function ComposeAlweet() {
   const inputRef = useRef()
   const textareaRef = useRef()
 
+  console.log({ imgURLS })
   useEffect(() => {
     textareaRef.current.focus()
     if (task) {
       const onProgress = () => {}
       const onError = () => {}
       const onComplete = () => {
-        getDownloadURL(task.snapshot.ref).then(setImgURL)
+        getDownloadURL(task.task.snapshot.ref).then((imgUrl) => {
+          setImgURLS((prev) => [...prev, imgUrl])
+        })
       }
-      task.on("state_changed", onProgress, onError, onComplete)
+      task.task.on("state_changed", onProgress, onError, onComplete)
     }
   }, [task])
 
   const handleChange = (event) => {
     const { value } = event.target
     setMessage(value)
+  }
+  const handleImageDeletion = (imageURL) => {
+    setImgURLS((prev) => prev.filter((image) => imageURL !== image))
   }
 
   const handleSubmit = (event) => {
@@ -64,7 +72,7 @@ export default function ComposeAlweet() {
       content: message,
       userId: user.uid,
       userName: user.username,
-      img: imgURL
+      imgs: imgURLS
     })
       .then(() => {
         router.push("/home")
@@ -90,13 +98,22 @@ export default function ComposeAlweet() {
   const handleDrop = (e) => {
     e.preventDefault()
     setDrag(DRAG_IMAGES_STATES.NONE)
+    const files = Object.values(e.dataTransfer.files)
 
-    const task = uploadImage(e.dataTransfer.files[0])
-    setTask(task)
+    files.forEach(async (file) => {
+      const task = await uploadImage(file)
+      console.log(task.task)
+      setTask(task)
+    })
   }
   const handleFileInputChange = (e) => {
-    const task = uploadImage(e.target.files[0])
-    setTask(task)
+    const files = Object.values(e.target.files)
+
+    files.forEach(async (file) => {
+      const task = await uploadImage(file)
+      console.log(task.task)
+      setTask(task)
+    })
   }
 
   // // const handleFiles = (e) => {
@@ -136,14 +153,19 @@ export default function ComposeAlweet() {
             onDragLeave={handleDragLeave}
             ref={textareaRef}
           ></textarea>
-          {imgURL && (
-            <section className="remove-img">
-              <button onClick={() => setImgURL(null)}>
-                <X />
-              </button>
-              <img src={imgURL} />
-            </section>
-          )}
+          <div className="images-container">
+            {imgURLS &&
+              imgURLS.map((imgURL) => {
+                return (
+                  <section className="remove-img" key={imgURL}>
+                    <button onClick={() => handleImageDeletion(imgURL)}>
+                      <X />
+                    </button>
+                    <img src={imgURL} />
+                  </section>
+                )
+              })}
+          </div>
           <div className="button-container">
             <Button disabled={isButtonDisabled}>Alweet</Button>
             <div className="image-upload">
@@ -157,6 +179,8 @@ export default function ComposeAlweet() {
                 name="files[]"
                 onChange={handleFileInputChange}
                 ref={inputRef}
+                multiple
+                maxLength={3}
               />
             </div>
           </div>
@@ -198,6 +222,12 @@ export default function ComposeAlweet() {
           .remove-img {
             position: relative;
           }
+
+          .images-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          }
+          
           textarea {
             min-width: 100%;
             border: ${drag === DRAG_IMAGES_STATES.DRAG_OVER

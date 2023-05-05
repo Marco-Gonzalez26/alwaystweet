@@ -6,7 +6,7 @@ import useDateTimeFormat from "hooks/useDateTimeFormat"
 
 export default function Alweet({
   avatar,
-  img,
+  imgs,
   userName,
   content,
   id,
@@ -42,7 +42,9 @@ export default function Alweet({
           </header>
 
           <p>{content}</p>
-          <div className="alweet-img-container">{img && <img src={img} />}</div>
+          <div className="alweet-img-container">
+            {imgs && imgs.map((img) => <img src={img} key={img} />)}
+          </div>
         </section>
       </article>
       <style jsx>
@@ -66,18 +68,18 @@ export default function Alweet({
           }
 
           .alweet-img-container {
-            width: 100%;
-            height: auto;
-            justify-content: center;
-            align-items: center;
             display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        
+            gap: 6px;
           }
-          img {
-            height: auto;
-            max-height: 500px;
-            max-width: 250px;
-            object-fit: cover;
-            border-radius: 10px;
+          .alweet-img-container > img {
+            flex: 1 1 0;
+            border-radius: 9px;
+            max-width: 270px;
+            width: 100%;
+            object-fit: contain;
             margin-top: 10px;
           }
           p {
