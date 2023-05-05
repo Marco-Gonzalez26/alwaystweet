@@ -45,7 +45,7 @@ export default function AlweetPage(props) {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { id: "EMofFsrJyLNIQKxPdwzi" } }],
+    paths: [{ params: { id: "f2eZDv0Qeu5WUGkDsUbE" } }],
     fallback: "blocking"
   }
 }
